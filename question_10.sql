@@ -22,12 +22,34 @@ SELECT namefirst AS first_name,
 		namelast AS last_name,
 		players_2016.hr AS hr_total_2016	
 FROM players_2016 LEFT JOIN all_players USING(playerid, hr)
-WHERE num_seasons_played > 9
+WHERE num_seasons_played > 9;
 
 
+SELECT DISTINCT playerid,
+			COUNT(DISTINCT yearid) AS num_seasons_played,
+			MAX(hr) AS hr
+FROM batting
+GROUP BY playerid
+ORDER BY hr DESC;
+
+SELECT DISTINCT playerid,
+			namefirst AS first_name,
+			namelast AS last_name,
+			COUNT(DISTINCT yearid) AS years_played,
+			MAX(hr) AS max_hr_total
+FROM batting INNER JOIN people USING(playerid)
+GROUP BY playerid, namefirst, namelast
+HAVING COUNT(DISTINCT yearid) > 9;
 
 
+SELECT playerid, SUM(hr)
+FROM batting
+WHERE yearid = 2016
+GROUP BY playerid;
 
+
+SELECT *
+FROM batting INNER JOIN people USING(playerid);
 
 
 
