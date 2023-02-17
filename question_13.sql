@@ -25,7 +25,6 @@ SELECT ROUND(COUNT(CASE WHEN throws = 'R' THEN 1 END)::numeric/COUNT(*) * 100,2)
 FROM hof_pitchers;
 
 
-
 SELECT throws,
 		ROUND(SUM(w)::numeric/(SUM(w)+SUM(l)),3)*100 AS win_perc
 FROM pitching INNER JOIN people USING(playerid)
